@@ -5,7 +5,6 @@ USE `filaru`;
 
 DROP TABLE IF EXISTS `alunos`;
 DROP TABLE IF EXISTS `filas`;
-DROP TABLE IF EXISTS `fila_data`;
 DROP TABLE IF EXISTS `restaurantes`;
 DROP TABLE IF EXISTS `funcionarios`;
 DROP TABLE IF EXISTS `funcionario_restaurante`;
@@ -19,12 +18,12 @@ CREATE TABLE alunos (
 );
 
 CREATE TABLE restaurantes (
-  codigo INT PRIMARY KEY,
+  codigo INT PRIMARY KEY AUTO_INCREMENT,
   nome VARCHAR(60)
 );
 
 CREATE TABLE filas (
-  codigo INT PRIMARY KEY,
+  codigo INT PRIMARY KEY AUTO_INCREMENT,
   restaurante_codigo INT,
   vagas_restantes INT,
   posicao_atual INT,
@@ -33,7 +32,7 @@ CREATE TABLE filas (
 );
 
 CREATE TABLE funcionarios (
-  codigo INT PRIMARY KEY,
+  codigo INT PRIMARY KEY AUTO_INCREMENT,
   restaurante_codigo INT,
   nome VARCHAR(60),
   data_admissao DATE,
@@ -48,29 +47,31 @@ CREATE TABLE funcionario_restaurante (
  PRIMARY KEY (restaurante_codigo, funcionario_codigo)
 );
 
-CREATE TABLE cardapios (
-  codigo INT PRIMARY KEY,
-  restaurante_codigo INT,
-  data DATE,
-  FOREIGN KEY (restaurante_codigo) REFERENCES restaurantes(codigo)
-);
-
-CREATE TABLE aluno_fila (
-  aluno_matricula VARCHAR(20),
-  fila_codigo INT,
-  posicao INT,
-  FOREIGN KEY (aluno_matricula) REFERENCES alunos(matricula),
-  FOREIGN KEY (fila_codigo) REFERENCES filas(codigo),
-  PRIMARY KEY (aluno_matricula, fila_codigo)
-);
-
 CREATE TABLE pratos (
-  codigo INT PRIMARY KEY,
+  codigo INT PRIMARY KEY AUTO_INCREMENT,
   principal VARCHAR(30),
   salada VARCHAR(30),
   carne VARCHAR(30),
   suco VARCHAR(30),
   sobremesa VARCHAR(30)
+);
+
+CREATE TABLE cardapios (
+  codigo INT PRIMARY KEY AUTO_INCREMENT,
+  restaurante_codigo INT,
+  data_cardapio DATE,
+  pratos_codigo INT,
+  FOREIGN KEY (restaurante_codigo) REFERENCES restaurantes(codigo),
+  FOREIGN KEY (pratos_codigo) REFERENCES pratos(codigo)
+);
+
+CREATE TABLE aluno_fila (
+  aluno_matricula VARCHAR(20),
+  codigo_fila INT,
+  posicao INT,
+  FOREIGN KEY (aluno_matricula) REFERENCES alunos(matricula),
+  FOREIGN KEY (codigo_fila) REFERENCES filas(codigo),
+  PRIMARY KEY (aluno_matricula, codigo_fila)
 );
 
 CREATE TABLE cardapio_prato (

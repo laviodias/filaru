@@ -24,11 +24,11 @@ app.use(express.json());
 app.use("/alunos", alunoRoutes);
 app.use("/aluno_fila", alunoFilaRoutes);
 app.use("/cardapio_prato", cardapioPratoRoutes);
-app.use("/cardapio", cardapioRoutes);
-app.use("/prato", pratoRoutes);
-app.use("/fila", filaRoutes);
-app.use("/funcionario", funcionarioRoutes);
-app.use("/restaurante", restauranteRoutes);
+app.use("/cardapios", cardapioRoutes);
+app.use("/pratos", pratoRoutes);
+app.use("/filas", filaRoutes);
+app.use("/funcionarios", funcionarioRoutes);
+app.use("/restaurantes", restauranteRoutes);
 app.use("/funcionario_restaurante", funcionarioRestauranteRoutes);
 
 

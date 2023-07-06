@@ -50,7 +50,6 @@ export const create = (req, res) => {
         );
     } else {
       const employee = {
-        restaurante_codigo: req.body.restauranteCodigo,
         nome: req.body.nome,
         data_admissao: req.body.dataAdmissao,
       };

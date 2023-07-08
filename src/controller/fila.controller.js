@@ -127,3 +127,54 @@ export const remove = (req, res) => {
     }
   });
 };
+
+export const updateAfterInsertion = (codigoFila) => {
+  logger.info("UPDATE /filas/insertion");
+  database.query(
+    QUERY.UPDATE_VAGAS_RESTANTES,
+    [codigoFila],
+    (error, results) => {
+      if (error) {
+        logger.error(error.message);
+        return false;
+      } else {
+        logger.info("queue updated", results);
+        return true;
+      }
+    }
+  );
+}
+
+export const incrementPosicaoAtual = (req, res) => {
+  logger.info("UPDATE /filas/increment");
+  database.query(
+    QUERY.UPDATE_POSICAO_ATUAL,
+    Object.values(req.params),
+    (error, results) => {
+      if (error) {
+        logger.error(error.message);
+        res
+          .status(HttpStatus.BAD_REQUEST.code)
+          .send(
+            new Response(
+              HttpStatus.BAD_REQUEST.code,
+              HttpStatus.BAD_REQUEST.status,
+              "Error incrementing queue",
+              null
+            )
+          );
+      } else {
+        res
+          .status(HttpStatus.NO_CONTENT.code)
+          .send(
+            new Response(
+              HttpStatus.NO_CONTENT.code,
+              HttpStatus.NO_CONTENT.status,
+              "queue incremented",
+              null
+            )
+          );
+      }
+    }
+  );
+};

@@ -181,7 +181,7 @@ export const incrementPosicaoAtual = (req, res) => {
 
 
 export const findLastPosition = (req, res) => {
-  logger.info("GET /filas");
+  logger.info("GET /filas/lastPosition");
   database.query(QUERY.GET_LAST_POSITION, (error, results) => {
     if (!results) {
       res

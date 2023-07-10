@@ -181,7 +181,7 @@ export const incrementPosicaoAtual = (req, res) => {
 
 
 export const findLastPosition = (req, res) => {
-  logger.info("GET /filas");
+  logger.info("GET /filas/lastPosition");
   database.query(QUERY.GET_LAST_POSITION, (error, results) => {
     if (!results) {
       res
@@ -202,6 +202,37 @@ export const findLastPosition = (req, res) => {
             HttpStatus.OK.code,
             HttpStatus.OK.status,
             "queues:",
+            results
+          )
+        );
+    }
+  });
+};
+
+
+
+export const findIdByLastPos = (req, res) => {
+  logger.info("GET /lastPosition/last/");
+  database.query(QUERY.GET_CODIGO_FROM_POSITION, Object.values(req.params), (error, results) => {
+    if (!results) {
+      res
+        .status(HttpStatus.NOT_FOUND.code)
+        .send(
+          new Response(
+            HttpStatus.NOT_FOUND.code,
+            HttpStatus.NOT_FOUND.status,
+            "queue not found",
+            null
+          )
+        );
+    } else {
+      res
+        .status(HttpStatus.OK.code)
+        .send(
+          new Response(
+            HttpStatus.OK.code,
+            HttpStatus.OK.status,
+            "queue:",
             results
           )
         );

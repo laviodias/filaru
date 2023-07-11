@@ -7,6 +7,8 @@ import {
   incrementPosicaoAtual,
   findLastPosition,
   findIdByLastPos,
+  findFirstPosition,
+  updatePosicao,
 } from "../controller/fila.controller.js";
 
 const filaRoutes = express.Router();
@@ -16,5 +18,6 @@ filaRoutes.route("/:id").get(findOne).delete(remove);
 filaRoutes.route("/incrementar/:id").put(incrementPosicaoAtual)
 filaRoutes.route("/lastPosition/last").get(findLastPosition);
 filaRoutes.route("/lastPosition/last/:id").get(findIdByLastPos);
+filaRoutes.route("/firstPosition/first").get(findFirstPosition).put(updatePosicao);
 
 export default filaRoutes;

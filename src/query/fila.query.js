@@ -6,6 +6,7 @@ const QUERY = {
   DELETE: "DELETE FROM filas WHERE codigo = ?",
   UPDATE_VAGAS_RESTANTES: `UPDATE filas SET vagas_restantes = vagas_restantes - 1 WHERE codigo = ?;`,
   UPDATE_POSICAO_ATUAL: `UPDATE filas SET posicao_atual = posicao_atual + 1 WHERE codigo = ?;`,
+  GET_LAST_POSITION: `SELECT MAX(posicao_atual) FROM filas;`,
 };
 
 export default QUERY;

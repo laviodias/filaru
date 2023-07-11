@@ -178,3 +178,33 @@ export const incrementPosicaoAtual = (req, res) => {
     }
   );
 };
+
+
+export const findLastPosition = (req, res) => {
+  logger.info("GET /filas/lastPosition");
+  database.query(QUERY.GET_LAST_POSITION, (error, results) => {
+    if (!results) {
+      res
+        .status(HttpStatus.OK.code)
+        .send(
+          new Response(
+            HttpStatus.OK.code,
+            HttpStatus.OK.status,
+            "No queues found",
+            null
+          )
+        );
+    } else {
+      res
+        .status(HttpStatus.OK.code)
+        .send(
+          new Response(
+            HttpStatus.OK.code,
+            HttpStatus.OK.status,
+            "queues:",
+            results
+          )
+        );
+    }
+  });
+};

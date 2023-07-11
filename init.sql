@@ -37,8 +37,10 @@ CREATE TABLE filas (
 
 CREATE TABLE funcionarios (
   codigo INT PRIMARY KEY AUTO_INCREMENT,
+  restaurante_codigo INT,
   nome VARCHAR(60),
-  data_admissao DATE
+  data_admissao DATE,
+  FOREIGN KEY (restaurante_codigo) REFERENCES restaurantes(codigo)
 );
 
 CREATE TABLE funcionario_restaurante (

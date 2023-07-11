@@ -21,6 +21,13 @@ const app = express();
 app.use(cors({ origin: "*" }));
 app.use(express.json());
 
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:4200'); // Adicione a origem da sua aplicação Angular aqui
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
+
 app.use("/alunos", alunoRoutes);
 app.use("/aluno_fila", alunoFilaRoutes);
 app.use("/cardapio_prato", cardapioPratoRoutes);
